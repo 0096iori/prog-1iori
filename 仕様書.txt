@@ -1,0 +1,88 @@
+使用したAPI：Pixabay API
+  |     →Pixabayという画像検索サイトから画像を引っ張ってくることが出来る
+  |     ！---使用するためにはPixabayサイトに登録し、APIキーを得る必要がある---!
+  |      APIのキーに条件を付けることで検索画像をある程度絞ることが出来る
+  |      （例）：カテゴリ、セーフサーチ、検索言語コード
+  |      返される値は画像（フルサイズ、サムネサイズ）、画像ID、画像URLなど
+  |  
+  |－  …今回のアプリでのAPI使用方法
+  |      ・セレクトボックスを使って機種、画像タイプを選択できるようにする
+  |          →選択したもので条件を絞る
+  |      ・テキストボックスを用意し、キーワード検索ができるようにする
+  |      ・検索ワード、条件を基に画像検索を行い、画像を表示する
+  L      ・downloadボタンを押すことで画像ファイルをダウンロードできるようにする
+
+
+Electronの使用方法＆exeファイルでの出力方法
+    1.nodeがない場合はnodeをインストールする
+
+    2.cmdでElectronをインストールする
+        $ npm -g install electron-prebuilt
+
+    3.アプリケーションのディレクトリを作成する（ここはコマンドでなくても可）
+        $ mkdir sample
+
+    4.そのディレクトリに移動し、npm initする
+    （この時にアプリ名などの情報を聞かれるので入力）
+    $ cd sample
+    $ npm init -y
+
+    5.jsファイルに記述する（下記はHTMLを表示する記述）
+    'use strict';
+
+        // Electronのモジュール
+        const electron = require("electron");
+
+        // アプリケーションをコントロールするモジュール
+        const app = electron.app;
+
+        // ウィンドウを作成するモジュール
+        const BrowserWindow = electron.BrowserWindow;
+
+        // メインウィンドウはGCされないようにグローバル宣言
+        let mainWindow;
+
+        // 全てのウィンドウが閉じたら終了
+        app.on('window-all-closed', function() {
+        if (process.platform != 'darwin') {
+            app.quit();
+        }
+        });
+
+        // Electronの初期化完了後に実行
+        app.on('ready', function() {
+        // メイン画面の表示。ウィンドウの幅、高さを指定できる
+        mainWindow = new BrowserWindow({width: 800, height: 600});
+        mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+        // ウィンドウが閉じられたらアプリも終了
+        mainWindow.on('closed', function() {
+            mainWindow = null;
+        });
+        });
+
+    6.ディレクトリを上の階層へ戻し、クイックスタートする
+    $ cd ../
+    # クイックスタート
+    $ electron sample/
+
+    ---exeファイルでの出力方法---
+        1.アプリケーションをアーカイブ化する（asarというツールをダウンロードする）
+            $ npm install -g asar
+            $ # asar pack {アプリケーションディレクトリ} {出力ファイル名}.asar
+
+        2.実行できるか確認
+            $ electron sample.asar
+
+        3.electron-packagerをインストールする
+            $ npm i electron-packager -g
+
+        4.パッケージングする
+            $ # electron-packager <sourcedir> <appname> --platform=<platform> --arch=<arch> --version=<version>
+            $ electron-packager ./sample sample --platform=darwin,win32 --arch=x64 --electronVersion=0.36.1
+            ※引用の説明
+                platform ･･･ all, linux, win32, darwin のいずれかを選択、複数入れる場合はカンマ区切り
+                arch ･･･ all, ia32, x64 のいずれかを選択
+                electronVersion ･･･ Electronのバージョンを指定
+        
+        5.コマンド実行してしばらくするとディレクトリが出来る

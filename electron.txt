@@ -1,0 +1,3 @@
+ctrl + shift + i    →   コンソールを開く
+
+electron kadai/

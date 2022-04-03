@@ -1,0 +1,395 @@
+@font-face {
+  font-family: 'min';
+  src: url('ja-jp.eot') format('oldIE'),
+      url('ja-jp.woff') format('woff'),
+      url('ja-jp.ttf') format('truetype');
+}
+
+html{
+  font-family: 'min';
+}
+
+/*  画像の表示を横並びにする  */
+.pic_frame{
+    display:inline-block;
+    width:150px;
+    height:150px;
+    margin: 5px;
+}
+
+/*  画像の加工  */
+img:not(#title){
+    border:1px solid #d3d3d3; 
+    background-color: white;
+    border-radius: 0.75em;
+    transition: all 0.5s 0s ease;
+}
+
+img:hover:not(#title){
+    border:3px solid #3654db; 
+    background-color: white;
+    border-radius: 0.75em;
+}
+
+#title{
+  width: 70%;    /* 横幅を割合で指定 */
+  height: auto;  /* 高さは自動指定 */
+}
+
+/*  背景の処理  */
+html {  
+    background-color: hsl(55,45%,90%);
+    background-image:
+      /* Pink lines */
+      linear-gradient(
+          -116deg,
+          transparent 40%,
+          hsl(0,80%,80%) 0,
+          hsl(0,80%,80%) 42%,
+          transparent 42%
+          ),
+      linear-gradient(
+          116deg,
+          transparent 41%,
+          hsl(0,80%,80%) 0,
+          hsl(0,80%,80%) 43%,
+          transparent 43%
+          ),
+      
+      
+      /* Black lines */
+      linear-gradient(
+          -116deg,
+          transparent 40%,
+          hsl(0,0%,40%) 0,
+          hsl(0,0%,40%) 42%,
+          transparent 42%
+          ),
+      linear-gradient(
+          116deg,
+          transparent 41%,
+          hsl(0,0%,40%) 41%,
+          hsl(0,0%,40%) 43%,
+          transparent 43%
+          ),
+      
+      /* Black diamonds */
+      linear-gradient(
+          -115deg,
+          hsl(0,0%,40%) 16.5%,
+          transparent 0
+          ),
+      linear-gradient(
+          -65deg,
+          hsl(0,0%,40%) 16.5%,
+          transparent 0
+          ),
+      linear-gradient(
+          115deg,
+          hsl(0,0%,40%) 16.5%,
+          transparent 0
+          ),
+      linear-gradient(
+          65deg,
+          hsl(0,0%,40%) 16.5%,
+          transparent 0
+          ),
+      
+      /* Pink diamonds */
+      linear-gradient(
+          -115deg,
+          hsl(0,80%,80%) 16.5%,
+          transparent 0
+          ),
+      linear-gradient(
+          -65deg,
+          hsl(0,80%,80%) 16.5%,
+          transparent 0
+          ),
+      linear-gradient(
+          115deg,
+          hsl(0,80%,80%) 16.5%,
+          transparent 0
+          ),
+      linear-gradient(
+          65deg,
+          hsl(0,80%,80%) 16.5%,
+          transparent 0
+          );
+    background-size: 
+      /* Pink lines */
+      8em 8em,
+      8em 8em,
+      
+      /* Black Lines */
+      8em 8em,
+      8em 8em,
+      
+      /* Black diamonds */
+      8em 8em,
+      8em 8em,
+      8em 8em,
+      8em 8em,
+      
+      /* Pink diamonds */
+      8em 8em,
+      8em 8em,
+      8em 8em,
+      8em 8em;
+    background-position: 
+      /* Pink lines */
+      3em -8em,
+      -3em -8em,
+      
+      /* Black Lines */
+      -9em 8em,
+      9em 8em,
+      
+      /* Black diamonds */
+      0, 0, 0, 0,
+      
+      /* Pink diamonds */
+      4em, 4em, 4em, 4em;
+    }
+/*  ここまで背景    */
+
+/*  「選択してください」を選択肢から外す処理*/
+  option[selected][disabled] {
+    display: none;
+  }
+  
+/*  セレクトボックスの見た目  */
+  .container {
+    margin: 80px auto;
+    width: 400px;
+    text-align: center;
+  }
+  
+  .container > .dropdown {
+    margin: 0 20px;
+    vertical-align: top;
+  }
+  
+  .dropdown {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    height: 28px;
+    width: 150px;
+    background: #f2f2f2;
+    border: 1px solid;
+    border-color: white #f7f7f7 whitesmoke;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  }
+  
+  .dropdown:before, .dropdown:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 9px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 4px dashed;
+    border-color: #888888 transparent;
+    pointer-events: none;
+  }
+  
+  .dropdown:before {
+    border-bottom-style: solid;
+    border-top: none;
+  }
+  
+  .dropdown:after {
+    margin-top: 7px;
+    border-top-style: solid;
+    border-bottom: none;
+  }
+  
+  .dropdown-select {
+    position: relative;
+    width: 130%;
+    margin: 0;
+    padding: 6px 8px 6px 10px;
+    height: 28px;
+    line-height: 14px;
+    font-size: 12px;
+    color: #62717a;
+    text-shadow: 0 1px white;
+    background: #f2f2f2; /* Fallback for IE 8 */
+    background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
+    border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+  
+  .dropdown-select:focus {
+    z-index: 3;
+    width: 100%;
+    color: #394349;
+    outline: 2px solid #49aff2;
+    outline: 2px solid -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+  
+  .dropdown-select > option {
+    margin: 3px;
+    padding: 6px 8px;
+    text-shadow: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  /* Fix for IE 8 putting the arrows behind the select element. */
+  
+  .lt-ie9 .dropdown {
+    z-index: 1;
+  }
+  
+  .lt-ie9 .dropdown-select {
+    z-index: -1;
+  }
+  
+  .lt-ie9 .dropdown-select:focus {
+    z-index: 3;
+  }
+  
+  /* Dirty fix for Firefox adding padding where it shouldn't. */
+  
+  @-moz-document url-prefix() {
+    .dropdown-select {
+      padding-left: 6px;
+    }
+  }
+  
+  .dropdown-dark {
+    background: #444;
+    border-color: #111111 #0a0a0a black;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+    background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+    background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown-dark:before {
+    border-bottom-color: #aaa;
+  }
+  
+  .dropdown-dark:after {
+    border-top-color: #aaa;
+  }
+  
+  .dropdown-dark .dropdown-select {
+    color: #aaa;
+    text-shadow: 0 1px black;
+    background: #444;  /* Fallback for IE 8 */
+  }
+  
+  .dropdown-dark .dropdown-select:focus {
+    color: #aaa;
+  }
+  
+  .dropdown-dark .dropdown-select > option {
+    background: #444;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+  }
+
+  /*    検索フォームのCSS*/
+  .search_container{
+    /*float:right;  /*これが原因？*/
+    width:150px;
+    height:150px;
+    position: relative;
+    right: 30px;
+    box-sizing: border-box;
+    display: block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    height: 1.8em;
+    width: 250px;
+    overflow: hidden;
+    left: 480px; /* 基準の位置を画面の一番右に指定する */
+    top: -34px;
+
+    background: #444;
+    border-color: #111111 #0a0a0a black;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+    background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+    background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+  .search_container input[type="text"]{
+    border: none;
+    height: 1.5em;
+    background: rgba(0, 0, 0, 0);
+    color: #aaa;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+  }
+  .search_container input[type="text"]:focus {
+    outline: 0;
+    color: #ccc;
+  }
+  .search_container input[type="submit"]{
+    color: #aaa;
+    cursor: pointer;
+    font-family: FontAwesome;
+    font-size: 1.3em;
+    border: none;
+    background: none;
+    position: absolute;
+    height: 2.5em;
+    right: 8px;
+    top: -10px;
+    outline : none;
+  }
+  .search_container ::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .neon{
+  color: rgb(168, 21, 82);       /* 文字色を白に変更 */
+  animation: flash 3s infinite; /* アニメーションflashを1秒ごとに繰り返す */
+  }
+
+  .neon:hover{
+    transition: 0.5s;
+    color: rgb(252, 122, 35);
+    animation: flash2 1s infinite;
+  }
+
+  @keyframes flash {
+    0%, 100% {
+      /* 明るく光るよう影を重ねる */
+      text-shadow: 0 0 3px #fff, 0 0 4px #fff, 0 0 5px #fff, 0 0 6px #ff00de, 0 0 7px #ff00de, 0 0 8px #ff00de, 0 0 9px #ff00de, 0 0 11px #ff00de;
+    }
+    50% {
+      /* 淡く光るよう影を重ねる */
+      text-shadow: 0 0 10px #fff, 0 0 6px #fcfcfc, 0 0 7px #fcfcfc, 0 0 8px #fc00de;
+    }
+  }
+
+  @keyframes flash2 {
+    0%, 100% {
+      /* 明るく光るよう影を重ねる */
+      text-shadow: 0 0 3px #fff, 0 0 4px #fff, 0 0 5px #fff, 0 0 6px #ffbb00, 0 0 7px #ffbb00, 0 0 8px #ffbb00, 0 0 9px #ffbb00, 0 0 11px #ffbb00;
+    }
+    50% {
+      /* 淡く光るよう影を重ねる */
+      text-shadow: 0 0 10px #fff, 0 0 6px #fcfcfc, 0 0 7px #fcfcfc, 0 0 8px #ffbb00;
+    }
+  }
+
+  h2{
+    text-shadow: 0 0 10px rgb(170, 170, 170)
+  }
